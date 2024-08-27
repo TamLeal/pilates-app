@@ -55,17 +55,17 @@ const Clientes = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col h-screen w-full p-4"> {/* Ajustado para ocupar a largura total */}
       {/* Lista de Clientes */}
-      <div className="w-full md:w-1/2 overflow-x-auto md:overflow-y-auto p-4 md:h-screen">
+      <div className="flex-1 overflow-x-auto">
         <Card>
           <CardContent>
             <h3 className="text-xl font-semibold mb-4">Lista de Clientes</h3>
-            <ul className="flex md:block space-x-4 md:space-x-0 overflow-x-scroll md:overflow-x-hidden">
+            <ul className="flex space-x-4 overflow-x-scroll">
               {clientes.map((cliente, index) => (
                 <li
                   key={index}
-                  className={`flex-shrink-0 md:flex-shrink items-center py-4 hover:bg-gray-50 transition-colors cursor-pointer ${
+                  className={`flex-shrink-0 items-center py-4 hover:bg-gray-50 transition-colors cursor-pointer ${
                     selectedClient === cliente ? 'bg-gray-200' : ''
                   }`}
                   onClick={() => handleClientClick(cliente)}
@@ -85,7 +85,7 @@ const Clientes = () => {
       </div>
 
       {/* Perfil do Cliente e Mapa */}
-      <div className="flex flex-col md:w-1/2 p-4">
+      <div className="flex flex-col mt-4">
         {selectedClient && (
           <Card className="mb-4">
             <CardContent>
@@ -103,7 +103,7 @@ const Clientes = () => {
         <MapContainer
           center={[28.5494, -81.7729]} // Coordenadas para Clermont, FL
           zoom={14}
-          style={{ height: "40vh", width: "100%" }} // Ajustando altura do mapa
+          style={{ height: "50vh", width: "100%" }} // Ajustando altura do mapa
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
