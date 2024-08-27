@@ -106,8 +106,8 @@ const PilatesStudioDashboard = () => {
       </div>
 
       {/* Conteúdo Principal */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8"> {/* Adicionei padding para centralizar melhor */}
-        <main>
+      <div className="flex-1 overflow-y-auto">
+        <main className="p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
             {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
           </h2>
