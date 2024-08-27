@@ -2,77 +2,44 @@ import React from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Users } from 'lucide-react';
 
+const clientes = [
+  { name: 'Maria Silva', plan: 'Plano Mensal', remaining: '20 aulas restantes' },
+  { name: 'João Santos', plan: 'Plano Mensal', remaining: '15 aulas restantes' },
+  { name: 'Ana Oliveira', plan: 'Plano Mensal', remaining: '22 aulas restantes' },
+  { name: 'Lucas Souza', plan: 'Plano Mensal', remaining: '18 aulas restantes' },
+  { name: 'Beatriz Lima', plan: 'Plano Mensal', remaining: '10 aulas restantes' },
+  { name: 'Rafael Costa', plan: 'Pacote 10 Aulas', remaining: '4 aulas restantes' },
+  { name: 'Carlos Silva', plan: 'Pacote 10 Aulas', remaining: '6 aulas restantes' },
+  { name: 'Laura Almeida', plan: 'Pacote 10 Aulas', remaining: '8 aulas restantes' },
+  { name: 'Fernanda Ribeiro', plan: 'Pacote 10 Aulas', remaining: '5 aulas restantes' },
+  { name: 'Eduardo Rocha', plan: 'Pacote 10 Aulas', remaining: '3 aulas restantes' },
+  { name: 'Mariana Costa', plan: 'Aula Avulsa', remaining: '' },
+  { name: 'Paulo Silva', plan: 'Aula Avulsa', remaining: '' },
+  { name: 'Aline Fernandes', plan: 'Aula Avulsa', remaining: '' },
+  { name: 'Ricardo Souza', plan: 'Aula Avulsa', remaining: '' },
+  { name: 'Juliana Santos', plan: 'Aula Avulsa', remaining: '' },
+];
+
 const Clientes = () => (
   <div className="space-y-6">
     <Card>
       <CardContent>
         <h3 className="text-xl font-semibold mb-4">Lista de Clientes</h3>
-        <ul className="space-y-3">
-          {/* Plano Mensal */}
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Maria Silva - Plano Mensal (20 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>João Santos - Plano Mensal (15 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Ana Oliveira - Plano Mensal (22 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Lucas Souza - Plano Mensal (18 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Beatriz Lima - Plano Mensal (10 aulas restantes)</span>
-          </li>
-
-          {/* Pacote de Aulas */}
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Rafael Costa - Pacote 10 Aulas (4 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Carlos Silva - Pacote 10 Aulas (6 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Laura Almeida - Pacote 10 Aulas (8 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Fernanda Ribeiro - Pacote 10 Aulas (5 aulas restantes)</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Eduardo Rocha - Pacote 10 Aulas (3 aulas restantes)</span>
-          </li>
-
-          {/* Aula Avulsa */}
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Mariana Costa - Aula Avulsa</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Paulo Silva - Aula Avulsa</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Aline Fernandes - Aula Avulsa</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Ricardo Souza - Aula Avulsa</span>
-          </li>
-          <li className="flex items-center text-gray-700">
-            <Users className="mr-2" size={18} />
-            <span>Juliana Santos - Aula Avulsa</span>
-          </li>
+        <ul className="divide-y divide-gray-200">
+          {clientes.map((cliente, index) => (
+            <li
+              key={index}
+              className="flex items-center py-4 hover:bg-gray-50 transition-colors"
+            >
+              <Users className="mr-4 text-indigo-600" size={24} />
+              <div className="flex flex-col">
+                <span className="font-medium text-gray-900">{cliente.name}</span>
+                <span className="text-sm text-gray-500">
+                  {cliente.plan} {cliente.remaining && `(${cliente.remaining})`}
+                </span>
+              </div>
+            </li>
+          ))}
         </ul>
       </CardContent>
     </Card>
