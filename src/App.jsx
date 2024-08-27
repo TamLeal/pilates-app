@@ -11,6 +11,7 @@ import {
   DollarSign,
   FileText,
   PlusCircle,
+  Dumbbell, // Ícone de haltere substituto
 } from 'lucide-react';
 
 const PilatesStudioDashboard = () => {
@@ -20,7 +21,7 @@ const PilatesStudioDashboard = () => {
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;
-      case 'agendamento':
+      case 'agendamento': // A lógica interna ainda usa "agendamento"
         return <Agendamento />;
       case 'clientes':
         return <Clientes />;
@@ -38,8 +39,9 @@ const PilatesStudioDashboard = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       <div className="w-64 bg-indigo-600 text-white">
-        <div className="p-4">
-          <h1 className="text-2xl font-bold">Estúdio Pilates</h1>
+        <div className="p-4 flex items-center">
+          <Dumbbell size={24} className="mr-2" /> {/* Ícone de haltere substituto */}
+          <h1 className="text-2xl font-bold">Estúdio Prilates</h1> {/* Nome atualizado */}
         </div>
         <nav className="mt-8">
           <NavButton
@@ -51,8 +53,8 @@ const PilatesStudioDashboard = () => {
           />
           <NavButton
             icon={<Calendar size={20} />}
-            label="Agendamento"
-            tab="agendamento"
+            label="Agenda" // Nome da aba atualizado
+            tab="agendamento" // A lógica interna ainda usa "agendamento"
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
