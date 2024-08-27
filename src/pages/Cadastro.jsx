@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from '../components/ui/card';
+import { Calendar } from 'lucide-react';
 
 const Cadastro = () => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -121,6 +122,40 @@ const Cadastro = () => (
             Cadastrar Aula
           </button>
         </form>
+      </CardContent>
+    </Card>
+
+    {/* Sugestões de Horários com Capacidade Ociosa */}
+    <Card className="col-span-1 md:col-span-2">
+      <CardContent>
+        <h3 className="text-xl font-semibold mb-4">Sugestões de Horários</h3>
+        <p>Aproveite as vagas disponíveis nas seguintes aulas:</p>
+        <ul className="space-y-2 mt-4">
+          <li className="flex items-center">
+            <Calendar className="mr-2 text-blue-500" size={18} />
+            <span>
+              <strong>Pilates Iniciante:</strong> Segunda-feira, 4 de setembro, 08:00 - 09:00 (4/10 vagas)
+            </span>
+          </li>
+          <li className="flex items-center">
+            <Calendar className="mr-2 text-blue-500" size={18} />
+            <span>
+              <strong>Pilates Intermediário:</strong> Terça-feira, 5 de setembro, 10:00 - 11:00 (6/10 vagas)
+            </span>
+          </li>
+          <li className="flex items-center">
+            <Calendar className="mr-2 text-blue-500" size={18} />
+            <span>
+              <strong>Pilates Avançado:</strong> Quarta-feira, 6 de setembro, 13:00 - 14:00 (5/10 vagas)
+            </span>
+          </li>
+          <li className="flex items-center">
+            <Calendar className="mr-2 text-blue-500" size={18} />
+            <span>
+              <strong>Pilates Iniciante:</strong> Quinta-feira, 7 de setembro, 08:00 - 09:00 (3/10 vagas)
+            </span>
+          </li>
+        </ul>
       </CardContent>
     </Card>
   </div>
