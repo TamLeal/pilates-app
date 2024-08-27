@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardTitle, CardDescription } from '../components/ui/card';
-import { Calendar, Users, DollarSign, Heart, Star, Activity, ThumbsUp, TrendingUp, Clock } from 'lucide-react';
+import { Calendar, Users, DollarSign, Heart, Star, Activity, ThumbsUp, TrendingUp, Clock, AlertCircle, Maximize2, UserX } from 'lucide-react';
 
 const Dashboard = () => (
   <div className="space-y-6">
@@ -124,6 +124,46 @@ const Dashboard = () => (
         </ul>
       </CardContent>
     </Card>
+
+    {/* Área de Avisos */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <Card className="bg-gray-100 border-l-4 border-gray-400 text-gray-700">
+        <CardContent>
+          <div className="flex items-center">
+            <AlertCircle className="mr-2 text-gray-500" size={24} />
+            <div>
+              <p className="text-lg font-semibold">Pagamentos Pendentes</p>
+              <p className="text-sm">Existem 3 pagamentos pendentes. Verifique a aba de pagamentos para mais detalhes.</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gray-100 border-l-4 border-gray-400 text-gray-700">
+        <CardContent>
+          <div className="flex items-center">
+            <Maximize2 className="mr-2 text-gray-500" size={24} />
+            <div>
+              <p className="text-lg font-semibold">Capacidade de Aula</p>
+              <p className="text-sm">A aula de Pilates Intermediário está com 9/10 vagas preenchidas. Considere adicionar uma nova sessão.</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-gray-100 border-l-4 border-gray-400 text-gray-700">
+        <CardContent>
+          <div className="flex items-center">
+            <UserX className="mr-2 text-gray-500" size={24} />
+            <div>
+              <p className="text-lg font-semibold">Clientes Não Retornaram</p>
+              <p className="text-sm">5 clientes que vieram uma vez não retornaram. Considere fazer um follow-up.</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+
   </div>
 );
 
