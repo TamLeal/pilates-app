@@ -41,9 +41,9 @@ const Dashboard = () => (
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Receita Mensal</CardTitle>
-              <p className="text-3xl font-bold">R$ 20.200</p>
+              <p className="text-3xl font-bold">$20,200</p>
               <CardDescription className="text-sm mt-1 text-black opacity-80">
-                Meta: R$ 22.000
+                Meta: $22,000
               </CardDescription>
             </div>
             <DollarSign size={40} className="opacity-70" />
