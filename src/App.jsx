@@ -106,23 +106,26 @@ const PilatesStudioDashboard = () => {
           <h1 className="text-xl font-bold">Estúdio Prilates</h1>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-20 md:pb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </h2>
-          {renderContent()}
-        </main>
+        {/* Área de conteúdo scrollável */}
+        <div className="flex-1 overflow-y-auto md:overflow-y-visible">
+          <main className="p-4 md:p-8 pb-24 md:pb-8"> {/* Aumentado o padding-bottom para dar espaço ao menu fixo */}
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+              {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+            </h2>
+            {renderContent()}
+          </main>
+        </div>
 
         {/* Menu de Navegação Inferior (apenas mobile) */}
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
-          <div className="flex justify-around">
-            <IconButton icon={<Home size={24} />} tab="dashboard" activeTab={activeTab} handleClick={handleNavButtonClick} />
-            <IconButton icon={<Calendar size={24} />} tab="agendamento" activeTab={activeTab} handleClick={handleNavButtonClick} />
-            <IconButton icon={<Users size={24} />} tab="clientes" activeTab={activeTab} handleClick={handleNavButtonClick} />
-            <IconButton icon={<FileText size={24} />} tab="relatorios" activeTab={activeTab} handleClick={handleNavButtonClick} />
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2">
+          <div className="flex justify-around items-center">
+            <IconButton icon={<Home size={28} />} tab="dashboard" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <IconButton icon={<Calendar size={28} />} tab="agendamento" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <IconButton icon={<Users size={28} />} tab="clientes" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <IconButton icon={<FileText size={28} />} tab="relatorios" activeTab={activeTab} handleClick={handleNavButtonClick} />
             <div className="relative">
               <IconButton 
-                icon={<MoreHorizontal size={24} />} 
+                icon={<MoreHorizontal size={28} />} 
                 tab="more" 
                 activeTab={activeTab} 
                 handleClick={() => setShowMoreOptions(!showMoreOptions)} 
