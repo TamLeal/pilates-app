@@ -4,95 +4,92 @@ import { Calendar, Users, DollarSign, Heart, Star, Activity, ThumbsUp, TrendingU
 
 const Dashboard = () => (
   <div className="space-y-6">
-    {/* Primeira linha de cards */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card className="bg-gradient-to-br from-blue-400 to-blue-600 text-white">
+    {/* Cards principais */}
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+      <Card className="bg-gradient-to-br from-blue-500 to-blue-700 text-white">
         <CardContent>
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Aulas Hoje</CardTitle>
               <p className="text-3xl font-bold">18</p>
-              <CardDescription className="text-sm mt-1 text-black opacity-80">
+              <p className="text-sm mt-1 font-semibold text-gray-800">
                 2 vagas restantes
-              </CardDescription>
+              </p>
             </div>
             <Calendar size={40} className="opacity-70" />
           </div>
         </CardContent>
       </Card>
-      
-      <Card className="bg-gradient-to-br from-green-400 to-green-600 text-white">
+
+      <Card className="bg-gradient-to-br from-green-500 to-green-700 text-white">
         <CardContent>
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Clientes Ativos</CardTitle>
               <p className="text-3xl font-bold">203</p>
-              <CardDescription className="text-sm mt-1 text-black opacity-80">
+              <p className="text-sm mt-1 font-semibold text-gray-800">
                 +8% este mês
-              </CardDescription>
+              </p>
             </div>
             <Users size={40} className="opacity-70" />
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-white">
+      <Card className="bg-gradient-to-br from-yellow-500 to-yellow-700 text-white">
         <CardContent>
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Receita Mensal</CardTitle>
               <p className="text-3xl font-bold">$20,200</p>
-              <CardDescription className="text-sm mt-1 text-black opacity-80">
+              <p className="text-sm mt-1 font-semibold text-gray-800">
                 Meta: $22,000
-              </CardDescription>
+              </p>
             </div>
             <DollarSign size={40} className="opacity-70" />
           </div>
         </CardContent>
       </Card>
-    </div>
 
-    {/* Segunda linha de cards */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card className="bg-gradient-to-br from-pink-400 to-pink-600 text-white">
+      <Card className="bg-gradient-to-br from-red-500 to-red-700 text-white">
         <CardContent>
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Taxa de Retenção</CardTitle>
               <p className="text-3xl font-bold">90%</p>
-              <CardDescription className="text-sm mt-1 text-black opacity-80">
+              <p className="text-sm mt-1 font-semibold text-gray-800">
                 Fidelidade alta
-              </CardDescription>
+              </p>
             </div>
             <Heart size={40} className="opacity-70" />
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-orange-400 to-orange-600 text-white">
+      <Card className="bg-gradient-to-br from-orange-500 to-orange-700 text-white">
         <CardContent>
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Avaliação Média</CardTitle>
               <p className="text-3xl font-bold">4.9★</p>
-              <CardDescription className="text-sm mt-1 text-black opacity-80">
+              <p className="text-sm mt-1 font-semibold text-gray-800">
                 150 avaliações este mês
-              </CardDescription>
+              </p>
             </div>
             <Star size={40} className="opacity-70" />
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-gradient-to-br from-indigo-400 to-indigo-600 text-white">
+      <Card className="bg-gradient-to-br from-teal-500 to-teal-700 text-white">
         <CardContent>
           <div className="flex justify-between items-center">
             <div>
               <CardTitle className="text-lg font-medium mb-1">Ocupação Média</CardTitle>
               <p className="text-3xl font-bold">87%</p>
-              <CardDescription className="text-sm mt-1 text-black opacity-80">
+              <p className="text-sm mt-1 font-semibold text-gray-800">
                 Capacidade total: 250
-              </CardDescription>
+              </p>
             </div>
             <Activity size={40} className="opacity-70" />
           </div>
@@ -163,7 +160,6 @@ const Dashboard = () => (
         </CardContent>
       </Card>
     </div>
-
   </div>
 );
 
