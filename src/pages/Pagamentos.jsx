@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '../components/ui/card';
-import { DollarSign, CheckCircle, XCircle, Filter, Sliders, RefreshCcw } from 'lucide-react';
+import { DollarSign, CheckCircle, XCircle, Filter, RefreshCw } from 'lucide-react';
 
 const Pagamentos = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
-  const [filterStatus, setFilterStatus] = useState('Todos');
-  const [filterPlan, setFilterPlan] = useState('Todos');
+  const [filterStatus, setFilterStatus] = useState('Todos os Status');
+  const [filterPlan, setFilterPlan] = useState('Todos os Planos');
 
   const pagamentos = [
-    { name: 'Maria Silva', amount: '$200.00', plan: 'Plano Mensal', status: 'Pago', date: '08-01-2024', paymentMethod: 'Cartão de Crédito', details: 'Pagamento via Visa' },
-    { name: 'João Santos', amount: '$200.00', plan: 'Plano Mensal', status: 'Pendente', date: '08-02-2024', paymentMethod: 'Transferência Bancária', details: 'Aguardando confirmação do banco.', observation: 'Aguardando confirmação do banco.' },
-    { name: 'Ana Oliveira', amount: '$200.00', plan: 'Plano Mensal', status: 'Pago', date: '08-03-2024', paymentMethod: 'Cartão de Crédito', details: 'Pagamento via MasterCard' },
-    { name: 'Lucas Souza', amount: '$150.00', plan: 'Pacote 10 Aulas', status: 'Pago', date: '08-04-2024', paymentMethod: 'Cartão de Débito', details: 'Pagamento via Visa Débito' },
-    { name: 'Beatriz Lima', amount: '$150.00', plan: 'Pacote 10 Aulas', status: 'Pendente', date: '08-05-2024', paymentMethod: 'Transferência Bancária', details: 'Aguardando confirmação.', observation: 'Cartão de crédito expirado.' },
-    { name: 'Rafael Costa', amount: '$150.00', plan: 'Pacote 10 Aulas', status: 'Pago', date: '08-06-2024', paymentMethod: 'Cartão de Crédito', details: 'Pagamento via American Express' },
-    { name: 'Carlos Silva', amount: '$50.00', plan: 'Aula Avulsa', status: 'Pago', date: '08-07-2024', paymentMethod: 'Cartão de Crédito', details: 'Pagamento via Visa' },
-    { name: 'Laura Almeida', amount: '$50.00', plan: 'Aula Avulsa', status: 'Pendente', date: '08-08-2024', paymentMethod: 'Transferência Bancária', details: 'Aguardando depósito.', observation: 'Aguardando depósito bancário.' },
-    { name: 'Fernanda Ribeiro', amount: '$50.00', plan: 'Aula Avulsa', status: 'Pago', date: '08-09-2024', paymentMethod: 'Cartão de Débito', details: 'Pagamento via MasterCard Débito' },
+    { id: '001', name: 'Maria Silva', amount: '$200.00', plan: 'Plano Mensal', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Cartão de Crédito', status: 'Confirmado', discount: 'Nenhum', observation: 'Pagamento automático processado com sucesso.' },
+    { id: '002', name: 'João Santos', amount: '$200.00', plan: 'Plano Mensal', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Cartão de Crédito', status: 'Pendente', discount: 'Nenhum', observation: 'Aguardando confirmação do banco.' },
+    { id: '003', name: 'Ana Oliveira', amount: '$200.00', plan: 'Plano Mensal', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Cartão de Crédito', status: 'Confirmado', discount: '$20.00', observation: 'Pagamento processado com sucesso.' },
+    { id: '004', name: 'Lucas Souza', amount: '$150.00', plan: 'Pacote 10 Aulas', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Boleto Bancário', status: 'Confirmado', discount: '$10.00', observation: 'Pagamento manual via boleto.' },
+    { id: '005', name: 'Beatriz Lima', amount: '$150.00', plan: 'Pacote 10 Aulas', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Cartão de Crédito', status: 'Pendente', discount: 'Nenhum', observation: 'Cartão de crédito expirado.' },
+    { id: '006', name: 'Rafael Costa', amount: '$150.00', plan: 'Pacote 10 Aulas', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Cartão de Crédito', status: 'Confirmado', discount: '$5.00', observation: 'Pagamento automático processado com sucesso.' },
+    { id: '007', name: 'Carlos Silva', amount: '$50.00', plan: 'Aula Avulsa', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Dinheiro', status: 'Confirmado', discount: 'Nenhum', observation: 'Pagamento em dinheiro no local.' },
+    { id: '008', name: 'Laura Almeida', amount: '$50.00', plan: 'Aula Avulsa', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Transferência Bancária', status: 'Pendente', discount: 'Nenhum', observation: 'Aguardando depósito bancário.' },
+    { id: '009', name: 'Fernanda Ribeiro', amount: '$50.00', plan: 'Aula Avulsa', dueDate: '09-01-2024', installment: '1/1', paymentMethod: 'Dinheiro', status: 'Confirmado', discount: 'Nenhum', observation: 'Pagamento em dinheiro no local.' },
   ];
 
   const handleTransactionClick = (transaction) => {
-    if (transaction.status === 'Pendente') {
+    if (transaction.observation) {
       setSelectedTransaction(transaction);
     }
   };
@@ -30,14 +30,14 @@ const Pagamentos = () => {
   };
 
   const handleClearFilters = () => {
-    setFilterStatus('Todos');
-    setFilterPlan('Todos');
+    setFilterStatus('Todos os Status');
+    setFilterPlan('Todos os Planos');
   };
 
   const filteredPayments = pagamentos.filter((payment) => {
     return (
-      (filterStatus === 'Todos' || payment.status === filterStatus) &&
-      (filterPlan === 'Todos' || payment.plan === filterPlan)
+      (filterStatus === 'Todos os Status' || payment.status === filterStatus) &&
+      (filterPlan === 'Todos os Planos' || payment.plan === filterPlan)
     );
   });
 
@@ -45,77 +45,82 @@ const Pagamentos = () => {
     <div className="space-y-6">
       {/* Filtros */}
       <Card>
-        <CardContent>
-          <h3 className="text-xl font-semibold mb-4">Filtros de Pagamentos</h3>
-          <div className="flex space-x-4">
-            <div className="flex items-center space-x-2">
-              <Filter size={20} className="text-gray-600" />
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="border border-gray-300 rounded-md p-2"
-              >
-                <option value="Todos">Todos os Status</option>
-                <option value="Pago">Pago</option>
-                <option value="Pendente">Pendente</option>
-              </select>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Sliders size={20} className="text-gray-600" />
-              <select
-                value={filterPlan}
-                onChange={(e) => setFilterPlan(e.target.value)}
-                className="border border-gray-300 rounded-md p-2"
-              >
-                <option value="Todos">Todos os Planos</option>
-                <option value="Plano Mensal">Plano Mensal</option>
-                <option value="Pacote 10 Aulas">Pacote 10 Aulas</option>
-                <option value="Aula Avulsa">Aula Avulsa</option>
-              </select>
-            </div>
-            <button
-              onClick={handleClearFilters}
-              className="flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
-            >
-              <RefreshCcw size={20} className="mr-2" />
-              Limpar Filtros
-            </button>
-          </div>
+        <CardContent className="flex items-center space-x-4">
+          <Filter size={24} className="text-gray-500" />
+          <select
+            className="p-2 border rounded"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="Todos os Status">Todos os Status</option>
+            <option value="Confirmado">Confirmado</option>
+            <option value="Pendente">Pendente</option>
+          </select>
+          <select
+            className="p-2 border rounded"
+            value={filterPlan}
+            onChange={(e) => setFilterPlan(e.target.value)}
+          >
+            <option value="Todos os Planos">Todos os Planos</option>
+            <option value="Plano Mensal">Plano Mensal</option>
+            <option value="Pacote 10 Aulas">Pacote 10 Aulas</option>
+            <option value="Aula Avulsa">Aula Avulsa</option>
+          </select>
+          <button
+            className="flex items-center p-2 border rounded bg-gray-100 hover:bg-gray-200"
+            onClick={handleClearFilters}
+          >
+            <RefreshCw size={16} className="mr-2" />
+            Limpar Filtros
+          </button>
         </CardContent>
       </Card>
 
-      {/* Lista de Pagamentos */}
       <Card>
         <CardContent>
           <h3 className="text-xl font-semibold mb-4">Histórico de Pagamentos</h3>
-          <ul className="divide-y divide-gray-200">
-            {filteredPayments.map((transaction, index) => (
-              <li
-                key={index}
-                className="flex items-center py-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                onClick={() => handleTransactionClick(transaction)}
-              >
-                <DollarSign
-                  className={`mr-4 ${transaction.status === 'Pago' ? 'text-green-500' : 'text-yellow-500'}`}
-                  size={24}
-                />
-                <div className="flex-1">
-                  <span className="font-medium text-gray-900">{transaction.name}</span>
-                  <p className="text-sm text-gray-500">{transaction.plan} - {transaction.amount}</p>
-                  <p className="text-xs text-gray-400">{transaction.date}</p>
-                </div>
-                <div className="w-1/3 text-sm text-gray-500">
-                  <p>{transaction.paymentMethod}</p>
-                  <p className="text-xs text-gray-400">{transaction.details}</p>
-                </div>
-                {transaction.status === 'Pago' ? (
-                  <CheckCircle className="text-green-500" size={24} />
-                ) : (
-                  <XCircle className="text-red-500" size={24} />
-                )}
-              </li>
-            ))}
-          </ul>
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valor</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plano</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de Vencimento</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Parcelamento</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Forma de Pagamento</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status de Confirmação</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Desconto</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredPayments.map((transaction, index) => (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-50 cursor-pointer"
+                  onClick={() => handleTransactionClick(transaction)}
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{transaction.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.amount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.plan}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.dueDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.installment}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.paymentMethod}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.status}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.discount}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {transaction.status === 'Confirmado' ? (
+                      <CheckCircle className="text-green-500" size={24} />
+                    ) : (
+                      <XCircle className="text-red-500" size={24} />
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </CardContent>
       </Card>
 
