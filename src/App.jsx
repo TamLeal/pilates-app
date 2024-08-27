@@ -11,19 +11,20 @@ import {
   DollarSign,
   FileText,
   PlusCircle,
-  Dumbbell, // Ícone de haltere substituto
-  Menu, // Ícone de menu hambúrguer
+  Dumbbell,
+  Home,
+  MoreHorizontal,
 } from 'lucide-react';
 
 const PilatesStudioDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
         return <Dashboard />;
-      case 'agendamento': // A lógica interna ainda usa "agendamento"
+      case 'agendamento':
         return <Agendamento />;
       case 'clientes':
         return <Clientes />;
@@ -40,28 +41,20 @@ const PilatesStudioDashboard = () => {
 
   const handleNavButtonClick = (tab) => {
     setActiveTab(tab);
-    setSidebarOpen(false); // Fecha a sidebar após a seleção
+    setShowMoreOptions(false);
   };
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Menu de Hambúrguer */}
-      <div className="md:hidden p-4">
-        <Menu size={24} onClick={() => setSidebarOpen(!sidebarOpen)} />
-      </div>
-
-      <div
-        className={`fixed md:relative z-30 top-0 left-0 h-full w-64 bg-indigo-600 text-white transition-transform transform ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0`}
-      >
+      {/* Sidebar (apenas desktop) */}
+      <div className="hidden md:block fixed md:relative z-30 top-0 left-0 h-full w-64 bg-indigo-600 text-white">
         <div className="p-4 flex items-center">
-          <Dumbbell size={24} className="mr-2" /> {/* Ícone de haltere substituto */}
-          <h1 className="text-2xl font-bold">Estúdio Prilates</h1> {/* Nome atualizado */}
+          <Dumbbell size={24} className="mr-2" />
+          <h1 className="text-2xl font-bold">Estúdio Prilates</h1>
         </div>
         <nav className="mt-8">
           <NavButton
-            icon={<Calendar size={20} />}
+            icon={<Home size={20} />}
             label="Dashboard"
             tab="dashboard"
             activeTab={activeTab}
@@ -69,8 +62,8 @@ const PilatesStudioDashboard = () => {
           />
           <NavButton
             icon={<Calendar size={20} />}
-            label="Agenda" // Nome da aba atualizado
-            tab="agendamento" // A lógica interna ainda usa "agendamento"
+            label="Agenda"
+            tab="agendamento"
             activeTab={activeTab}
             handleClick={handleNavButtonClick}
           />
@@ -106,13 +99,53 @@ const PilatesStudioDashboard = () => {
       </div>
 
       {/* Conteúdo Principal */}
-      <div className="flex-1 overflow-y-auto">
-        <main className="p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Cabeçalho (apenas mobile) */}
+        <header className="md:hidden bg-indigo-600 text-white p-4 flex items-center">
+          <Dumbbell size={24} className="mr-2" />
+          <h1 className="text-xl font-bold">Estúdio Prilates</h1>
+        </header>
+
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-20 md:pb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
             {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
           </h2>
           {renderContent()}
         </main>
+
+        {/* Menu de Navegação Inferior (apenas mobile) */}
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+          <div className="flex justify-around">
+            <IconButton icon={<Home size={24} />} tab="dashboard" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <IconButton icon={<Calendar size={24} />} tab="agendamento" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <IconButton icon={<Users size={24} />} tab="clientes" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <IconButton icon={<FileText size={24} />} tab="relatorios" activeTab={activeTab} handleClick={handleNavButtonClick} />
+            <div className="relative">
+              <IconButton 
+                icon={<MoreHorizontal size={24} />} 
+                tab="more" 
+                activeTab={activeTab} 
+                handleClick={() => setShowMoreOptions(!showMoreOptions)} 
+              />
+              {showMoreOptions && (
+                <div className="absolute bottom-full right-0 mb-2 bg-white border border-gray-200 rounded-md shadow-lg">
+                  <button 
+                    onClick={() => handleNavButtonClick('pagamentos')}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Pagamentos
+                  </button>
+                  <button 
+                    onClick={() => handleNavButtonClick('cadastro')}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Cadastro
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
   );
@@ -127,6 +160,15 @@ const NavButton = ({ icon, label, tab, activeTab, handleClick }) => (
   >
     {icon}
     <span className="ml-3">{label}</span>
+  </button>
+);
+
+const IconButton = ({ icon, tab, activeTab, handleClick }) => (
+  <button
+    onClick={() => handleClick(tab)}
+    className={`p-2 ${activeTab === tab ? 'text-indigo-600' : 'text-gray-600'}`}
+  >
+    {icon}
   </button>
 );
 
