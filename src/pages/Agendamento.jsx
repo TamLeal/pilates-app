@@ -94,7 +94,15 @@ const Agendamentos = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleSelectEvent = (event) => {
-    setSelectedEvent(event);
+    if (selectedEvent && selectedEvent.title === event.title) {
+      setSelectedEvent(null);
+    } else {
+      setSelectedEvent(event);
+    }
+  };
+
+  const handleCardClick = () => {
+    setSelectedEvent(null);
   };
 
   return (
@@ -110,7 +118,7 @@ const Agendamentos = () => {
         popup
       />
       {selectedEvent && (
-        <Card className="mt-6">
+        <Card className="mt-6 cursor-pointer" onClick={handleCardClick}>
           <CardContent>
             <h3 className="text-xl font-semibold mb-2">
               {selectedEvent.title}
