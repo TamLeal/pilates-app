@@ -55,77 +55,89 @@ const Clientes = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full p-4"> {/* Ajustado para ocupar a largura total */}
+    <div className="flex flex-col h-full w-full p-4 space-y-4 overflow-hidden">
       {/* Lista de Clientes */}
-      <div className="flex-1 overflow-x-auto">
-        <Card>
-          <CardContent>
-            <h3 className="text-xl font-semibold mb-4">Lista de Clientes</h3>
-            <ul className="flex space-x-4 overflow-x-scroll">
+      <Card className="flex-shrink-0">
+        <CardContent>
+          <h3 className="text-xl font-semibold mb-2">Lista de Clientes</h3>
+          <div className="overflow-x-auto">
+            <ul className="flex space-x-4 pb-2">
               {clientes.map((cliente, index) => (
                 <li
                   key={index}
-                  className={`flex-shrink-0 items-center py-4 hover:bg-gray-50 transition-colors cursor-pointer ${
+                  className={`flex-shrink-0 items-center p-2 hover:bg-gray-50 transition-colors cursor-pointer rounded-lg ${
                     selectedClient === cliente ? 'bg-gray-200' : ''
                   }`}
                   onClick={() => handleClientClick(cliente)}
-                  style={{ minWidth: '200px' }} // Para o carrossel no mobile
+                  style={{ minWidth: '200px' }}
                 >
-                  <Users className="mr-4 text-indigo-600" size={24} />
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-900">{cliente.name}</span>
-                    <span className="text-sm text-gray-500">{cliente.plan} {cliente.remaining && `(${cliente.remaining})`}</span>
-                    <span className="text-xs text-gray-400">{cliente.address}</span> {/* Pseudo endereço */}
+                  <div className="flex items-center">
+                    <Users className="mr-2 text-indigo-600" size={24} />
+                    <div className="flex flex-col">
+                      <span className="font-medium text-gray-900">{cliente.name}</span>
+                      <span className="text-sm text-gray-500">{cliente.plan}</span>
+                      <span className="text-xs text-gray-400">{cliente.remaining}</span>
+                      <span className="text-xs text-gray-400">{cliente.address}</span>
+                    </div>
                   </div>
                 </li>
               ))}
             </ul>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* Perfil do Cliente e Mapa */}
-      <div className="flex flex-col mt-4">
-        {selectedClient && (
-          <Card className="mb-4">
-            <CardContent>
-              <h3 className="text-xl font-semibold mb-4">Perfil do Cliente</h3>
-              <p><strong>Nome:</strong> {selectedClient.name}</p>
-              <p><strong>Plano:</strong> {selectedClient.plan}</p>
-              <p><strong>Preferências:</strong> {selectedClient.preferences}</p>
-              <p><strong>Restrições:</strong> {selectedClient.restrictions}</p>
-              <p><strong>Objetivos:</strong> {selectedClient.goals}</p>
+      {/* Área para Perfil do Cliente e Mapa */}
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 min-h-0">
+        {/* Coluna do Perfil do Cliente */}
+        <div className="overflow-y-auto">
+          {selectedClient && (
+            <Card className="h-full">
+              <CardContent>
+                <h3 className="text-xl font-semibold mb-2">Perfil do Cliente</h3>
+                <p><strong>Nome:</strong> {selectedClient.name}</p>
+                <p><strong>Plano:</strong> {selectedClient.plan}</p>
+                <p><strong>Preferências:</strong> {selectedClient.preferences}</p>
+                <p><strong>Restrições:</strong> {selectedClient.restrictions}</p>
+                <p><strong>Objetivos:</strong> {selectedClient.goals}</p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        {/* Coluna do Mapa */}
+        <div className="h-full min-h-[300px]">
+          <Card className="h-full">
+            <CardContent className="h-full flex flex-col p-0">
+              <h3 className="text-xl font-semibold m-4">Localização dos Clientes</h3>
+              <div className="flex-1 w-full" style={{ minHeight: '300px' }}>
+                <MapContainer
+                  center={[28.5494, -81.7729]}
+                  zoom={14}
+                  style={{ height: '100%', width: '100%' }}
+                >
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  />
+                  {/* Marcadores aqui */}
+                  <Marker position={[28.5494, -81.7729]} icon={studioIcon}>
+                    <Popup>Estúdio Pilates</Popup>
+                  </Marker>
+                  {clientes.map((cliente, index) => (
+                    <Marker
+                      key={index}
+                      position={cliente.position}
+                      icon={selectedClient === cliente ? highlightedIcon : defaultIcon}
+                    >
+                      <Popup>{cliente.name}</Popup>
+                    </Marker>
+                  ))}
+                </MapContainer>
+              </div>
             </CardContent>
           </Card>
-        )}
-
-        <h3 className="text-xl font-semibold mb-4">Localização dos Clientes</h3>
-        <MapContainer
-          center={[28.5494, -81.7729]} // Coordenadas para Clermont, FL
-          zoom={14}
-          style={{ height: "50vh", width: "100%" }} // Ajustando altura do mapa
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-
-          {/* Marcador do estúdio em Clermont */}
-          <Marker position={[28.5494, -81.7729]} icon={studioIcon}>
-            <Popup>Estúdio Pilates</Popup>
-          </Marker>
-
-          {/* Marcadores de clientes */}
-          {clientes.map((cliente, index) => (
-            <Marker
-              key={index}
-              position={cliente.position}
-              icon={selectedClient === cliente ? highlightedIcon : defaultIcon}
-            >
-              <Popup>{cliente.name}</Popup>
-            </Marker>
-          ))}
-        </MapContainer>
+        </div>
       </div>
     </div>
   );
